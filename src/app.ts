@@ -26,12 +26,12 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", 'https://unpkg.com'],
-        scriptSrcElem: ["'self'", 'https://unpkg.com'],
-        styleSrc: ["'self'", 'https://unpkg.com'],
-        styleSrcElem: ["'self'", 'https://unpkg.com'],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrcElem: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        styleSrcElem: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", 'data:'],
-        connectSrc: ["'self'", 'https://unpkg.com'],
+        connectSrc: ["'self'", "'unsafe-inline'"],
       },
     },
   }),
