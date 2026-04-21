@@ -31,7 +31,7 @@ app.use(
         styleSrc: ["'self'", 'https://unpkg.com'],
         styleSrcElem: ["'self'", 'https://unpkg.com'],
         imgSrc: ["'self'", 'data:'],
-        connectSrc: ["'self'"],
+        connectSrc: ["'self'", 'https://unpkg.com'],
       },
     },
   }),
