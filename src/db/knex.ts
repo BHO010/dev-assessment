@@ -1,5 +1,5 @@
-import 'dotenv/config';
-import knex from 'knex';
+import 'dotenv/config'
+import knex from 'knex'
 
 const db = knex({
   client: 'mysql2',
@@ -10,6 +10,6 @@ const db = knex({
     password: process.env['DB_PASSWORD'],
     database: process.env['DB_NAME'],
   },
-});
+})
 
-export default db;
+export default db

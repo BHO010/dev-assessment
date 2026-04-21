@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import { commonStudents } from '../controllers/commonstudents.controller';
-import { validate } from '../middleware/validate';
-import { registry } from '../openapi/registry';
-import { CommonStudentsQuerySchema } from '../schemas/commonstudents.schema';
-import { z } from 'zod';
+import { Router } from 'express'
+import { commonStudents } from '../controllers/commonstudents.controller'
+import { validate } from '../middleware/validate'
+import { registry } from '../openapi/registry'
+import { CommonStudentsQuerySchema } from '../schemas/commonstudents.schema'
+import { z } from 'zod'
 
-const router = Router();
+const router = Router()
 
 registry.registerPath({
   method: 'get',
@@ -23,8 +23,8 @@ registry.registerPath({
     },
     400: { description: 'Validation error' },
   },
-});
+})
 
-router.get('/', validate({ query: CommonStudentsQuerySchema }), commonStudents);
+router.get('/', validate({ query: CommonStudentsQuerySchema }), commonStudents)
 
-export default router;
+export default router

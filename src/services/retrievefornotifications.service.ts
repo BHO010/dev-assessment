@@ -1,15 +1,15 @@
-import db from '../db/knex';
+import db from '../db/knex'
 
 function parseMentionedEmails(notification: string): string[] {
-  const matches = notification.matchAll(/@([\w.+-]+@[\w.-]+\.[a-zA-Z]{2,})/g);
-  return [...new Set([...matches].map((m) => m[1]))];
+  const matches = notification.matchAll(/@([\w.+-]+@[\w.-]+\.[a-zA-Z]{2,})/g)
+  return [...new Set([...matches].map((m) => m[1]))]
 }
 
 export async function getRecipientsForNotification(
   teacherEmail: string,
   notification: string,
 ): Promise<string[]> {
-  const mentionedEmails = parseMentionedEmails(notification);
+  const mentionedEmails = parseMentionedEmails(notification)
 
   const [registeredStudents, mentionedStudents] = await Promise.all([
     db('students as s')
@@ -24,14 +24,14 @@ export async function getRecipientsForNotification(
           .where({ suspended: false })
           .select<{ email: string }[]>('email')
       : Promise.resolve([]),
-  ]);
+  ])
 
   const recipients = [
     ...new Set([
       ...registeredStudents.map((s) => s.email),
       ...mentionedStudents.map((s) => s.email),
     ]),
-  ];
+  ]
 
-  return recipients;
+  return recipients
 }

@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import { register } from '../controllers/register.controller';
-import { validate } from '../middleware/validate';
-import { registry } from '../openapi/registry';
-import { RegisterBodySchema } from '../schemas/register.schema';
+import { Router } from 'express'
+import { register } from '../controllers/register.controller'
+import { validate } from '../middleware/validate'
+import { registry } from '../openapi/registry'
+import { RegisterBodySchema } from '../schemas/register.schema'
 
-const router = Router();
+const router = Router()
 
 registry.registerPath({
   method: 'post',
@@ -17,8 +17,8 @@ registry.registerPath({
     204: { description: 'Students registered successfully' },
     400: { description: 'Validation error' },
   },
-});
+})
 
-router.post('/', validate({ body: RegisterBodySchema }), register);
+router.post('/', validate({ body: RegisterBodySchema }), register)
 
-export default router;
+export default router

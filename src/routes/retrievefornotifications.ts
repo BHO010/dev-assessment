@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import { z } from 'zod';
-import { retrieveForNotifications } from '../controllers/retrievefornotifications.controller';
-import { validate } from '../middleware/validate';
-import { registry } from '../openapi/registry';
-import { RetrieveForNotificationsBodySchema } from '../schemas/retrievefornotifications.schema';
+import { Router } from 'express'
+import { z } from 'zod'
+import { retrieveForNotifications } from '../controllers/retrievefornotifications.controller'
+import { validate } from '../middleware/validate'
+import { registry } from '../openapi/registry'
+import { RetrieveForNotificationsBodySchema } from '../schemas/retrievefornotifications.schema'
 
-const router = Router();
+const router = Router()
 
 registry.registerPath({
   method: 'post',
@@ -25,8 +25,8 @@ registry.registerPath({
     },
     400: { description: 'Validation error' },
   },
-});
+})
 
-router.post('/', validate({ body: RetrieveForNotificationsBodySchema }), retrieveForNotifications);
+router.post('/', validate({ body: RetrieveForNotificationsBodySchema }), retrieveForNotifications)
 
-export default router;
+export default router
