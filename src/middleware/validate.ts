@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
-import { ZodSchema } from 'zod'
+import { ZodType } from 'zod'
 
 interface ValidateSchemas {
-  body?: ZodSchema
-  query?: ZodSchema
-  params?: ZodSchema
+  body?: ZodType
+  query?: ZodType
+  params?: ZodType
 }
 
 export function validate(schemas: ValidateSchemas) {
