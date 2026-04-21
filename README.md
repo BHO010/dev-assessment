@@ -24,8 +24,8 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd assignment
+   git clone https://github.com/BHO010/dev-assessment.git
+   cd dev-assessment
    ```
 
 2. **Install dependencies**
@@ -44,17 +44,17 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 
    Update the following variables in `.env`:
 
-   | Variable | Description |
-   |---|---|
-   | `PORT` | Port the server listens on (default: `3000`) |
-   | `DB_HOST` | MySQL host (e.g. `localhost`) |
-   | `DB_PORT` | MySQL port (default: `3306`) |
-   | `DB_USER` | MySQL username |
-   | `DB_PASSWORD` | MySQL password |
-   | `DB_NAME` | MySQL database name |
-   | `CORS_OPTIONS` | JSON string of CORS settings — update `origin` for production |
+   | Variable               | Description                                                    |
+   | ---------------------- | -------------------------------------------------------------- |
+   | `PORT`                 | Port the server listens on (default: `3000`)                   |
+   | `DB_HOST`              | MySQL host (e.g. `localhost`)                                  |
+   | `DB_PORT`              | MySQL port (default: `3306`)                                   |
+   | `DB_USER`              | MySQL username                                                 |
+   | `DB_PASSWORD`          | MySQL password                                                 |
+   | `DB_NAME`              | MySQL database name                                            |
+   | `CORS_OPTIONS`         | JSON string of CORS settings — update `origin` for production  |
    | `RATE_LIMIT_WINDOW_MS` | Rate limit window in milliseconds (default: `900000` = 15 min) |
-   | `RATE_LIMIT_MAX` | Max requests per window per IP (default: `100`) |
+   | `RATE_LIMIT_MAX`       | Max requests per window per IP (default: `100`)                |
 
 4. **Run database migrations**
 
@@ -78,6 +78,7 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 > Hosted API coming soon.
 >
 > <!-- Replace the placeholder below with your deployed URL -->
+>
 > Base URL: `https://your-deployed-url.com`
 >
 > Swagger UI: `https://your-deployed-url.com/api-docs`
