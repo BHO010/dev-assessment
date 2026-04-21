@@ -11,16 +11,30 @@ export function setupOpenApi(app: Express): void {
     servers: [{ url: '/api' }],
   })
 
-  app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(document, {
-      customCssUrl: 'https://unpkg.com/swagger-ui-dist@5/swagger-ui.css',
-      customJs: [
-        'https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js',
-        'https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js',
-      ],
-    }),
-  )
+  app.get('/api-docs', (_req, res) => {
+    res.setHeader('Content-Type', 'text/html')
+    res.send(`<!DOCTYPE html>
+<html>
+  <head>
+    <title>API Docs</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+    <script>
+      SwaggerUIBundle({
+        url: '/api-docs.json',
+        dom_id: '#swagger-ui',
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIBundle.SwaggerUIStandalonePreset],
+        layout: 'StandaloneLayout',
+      })
+    </script>
+  </body>
+</html>`)
+  })
   app.get('/api-docs.json', (_req, res) => res.json(document))
 }

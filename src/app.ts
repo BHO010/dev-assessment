@@ -25,12 +25,13 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        'script-src': ["'self'", 'https://unpkg.com'],
-        'script-src-elem': ["'self'", 'https://unpkg.com'],
-        'style-src': ["'self'", 'https://unpkg.com'],
-        'style-src-elem': ["'self'", 'https://unpkg.com'],
-        'img-src': ["'self'", 'data:'],
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", 'https://unpkg.com'],
+        scriptSrcElem: ["'self'", 'https://unpkg.com'],
+        styleSrc: ["'self'", 'https://unpkg.com'],
+        styleSrcElem: ["'self'", 'https://unpkg.com'],
+        imgSrc: ["'self'", 'data:'],
+        connectSrc: ["'self'"],
       },
     },
   }),
