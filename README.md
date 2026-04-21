@@ -74,10 +74,6 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 
 ## Try it Live
 
-> Hosted API coming soon.
->
-> <!-- Replace the placeholder below with your deployed URL -->
->
-> Base URL: `https://dev-assessment-chi.vercel.app`
->
-> Swagger UI: `https://dev-assessment-chi.vercel.app/api-docs/`
+Base URL: `https://dev-assessment-chi.vercel.app`
+
+Swagger UI: `https://dev-assessment-chi.vercel.app/api-docs/`
