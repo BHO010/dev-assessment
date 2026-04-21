@@ -1,4 +1,4 @@
-import db from '../db/knex'
+import { db } from '../db/knex'
 import { NotFoundError } from '../errors'
 
 export async function suspendStudent(email: string): Promise<void> {

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import db from '../db/knex'
+import { db } from '../db/knex'
 import { registry } from '../openapi/registry'
 
 const router = Router()

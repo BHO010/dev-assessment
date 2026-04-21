@@ -1,4 +1,4 @@
-import db from '../db/knex'
+import { db } from '../db/knex'
 
 export async function getCommonStudents(teacherEmails: string[]): Promise<string[]> {
   const uniqueEmails = [...new Set(teacherEmails)]

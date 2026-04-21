@@ -1,4 +1,4 @@
-import db from '../db/knex'
+import { db } from '../db/knex'
 
 export async function registerStudents(
   teacherEmail: string,

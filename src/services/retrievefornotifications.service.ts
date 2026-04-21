@@ -1,4 +1,4 @@
-import db from '../db/knex'
+import { db } from '../db/knex'
 
 function parseMentionedEmails(notification: string): string[] {
   const matches = notification.matchAll(/@([\w.+-]+@[\w.-]+\.[a-zA-Z]{2,})/g)
