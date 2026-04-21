@@ -21,7 +21,18 @@ const limiter = rateLimit({
 
 const corsOptions = process.env['CORS_OPTIONS'] ? JSON.parse(process.env['CORS_OPTIONS']) : {}
 
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'script-src': ["'self'", 'unpkg.com'],
+        'style-src': ["'self'", 'unpkg.com'],
+        'img-src': ["'self'", 'data:'],
+      },
+    },
+  }),
+)
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(limiter)
