@@ -21,11 +21,6 @@ const limiter = rateLimit({
 
 const corsOptions = process.env['CORS_OPTIONS'] ? JSON.parse(process.env['CORS_OPTIONS']) : {}
 
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  }),
-)
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(limiter)

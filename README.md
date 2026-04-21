@@ -8,7 +8,6 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 - **Knex.js** — SQL query builder and database migrations
 - **MySQL** — relational database
 - **Swagger / OpenAPI** — auto-generated API documentation served at `/api-docs`
-- **Helmet** — HTTP security headers
 - **express-rate-limit** — rate limiting to prevent API abuse
 - **Jest + Supertest** — unit testing
 
@@ -79,6 +78,6 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 >
 > <!-- Replace the placeholder below with your deployed URL -->
 >
-> Base URL: `https://your-deployed-url.com`
+> Base URL: `https://dev-assessment-chi.vercel.app`
 >
-> Swagger UI: `https://your-deployed-url.com/api-docs`
+> Swagger UI: `https://dev-assessment-chi.vercel.app/api-docs/`
