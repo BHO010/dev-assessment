@@ -4,16 +4,20 @@ export const RetrieveForNotificationsBodySchema = z
   .object({
     teacher: z
       .string({
-        required_error: 'teacher is required',
-        invalid_type_error: 'teacher must be a string',
+        error: (issue) =>
+          issue.input === undefined
+            ? { message: 'teacher is required' }
+            : { message: 'teacher must be a string' },
       })
-      .email({ message: 'Invalid teacher email' }),
+      .email({ error: 'Invalid teacher email' }),
     notification: z
       .string({
-        required_error: 'notification is required',
-        invalid_type_error: 'notification must be a string',
+        error: (issue) =>
+          issue.input === undefined
+            ? { message: 'notification is required' }
+            : { message: 'notification must be a string' },
       })
-      .min(1, { message: 'Notification text is required' }),
+      .min(1, { error: 'Notification text is required' }),
   })
   .openapi('RetrieveForNotificationsBody')
 

@@ -4,16 +4,20 @@ export const RegisterBodySchema = z
   .object({
     teacher: z
       .string({
-        required_error: 'teacher is required',
-        invalid_type_error: 'teacher must be a string',
+        error: (issue) =>
+          issue.input === undefined
+            ? { message: 'teacher is required' }
+            : { message: 'teacher must be a string' },
       })
-      .email({ message: 'Invalid teacher email' }),
+      .email({ error: 'Invalid teacher email' }),
     students: z
-      .array(z.string().email({ message: 'Invalid student email' }), {
-        required_error: 'students is required',
-        invalid_type_error: 'students must be an array of emails',
+      .array(z.string().email({ error: 'Invalid student email' }), {
+        error: (issue) =>
+          issue.input === undefined
+            ? { message: 'students is required' }
+            : { message: 'students must be an array of emails' },
       })
-      .min(1, { message: 'At least one student is required' }),
+      .min(1, { error: 'At least one student is required' }),
   })
   .openapi('RegisterBody')
 

@@ -4,10 +4,12 @@ export const SuspendBodySchema = z
   .object({
     student: z
       .string({
-        required_error: 'student is required',
-        invalid_type_error: 'student must be a string',
+        error: (issue) =>
+          issue.input === undefined
+            ? { message: 'student is required' }
+            : { message: 'student must be a string' },
       })
-      .email({ message: 'Invalid student email' }),
+      .email({ error: 'Invalid student email' }),
   })
   .openapi('SuspendBody')
 

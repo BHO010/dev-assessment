@@ -4,7 +4,7 @@ import { AppError } from '../errors'
 
 export function errorHandler(err: Error, _req: Request, res: Response, _next: NextFunction): void {
   if (err instanceof ZodError) {
-    const message = err.errors.map((e) => e.message).join(', ')
+    const message = err.issues.map((e) => e.message).join(', ')
     res.status(400).json({ message })
     return
   }

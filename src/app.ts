@@ -9,6 +9,8 @@ import routes from './routes'
 
 const app = express()
 
+app.set('trust proxy', 1)
+
 const limiter = rateLimit({
   windowMs: Number(process.env['RATE_LIMIT_WINDOW_MS'] ?? 15 * 60 * 1000),
   limit: Number(process.env['RATE_LIMIT_MAX'] ?? 100),
