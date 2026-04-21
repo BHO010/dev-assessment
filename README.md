@@ -37,7 +37,7 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
    Copy the example env file and fill in your values:
 
    ```bash
-   cp .env.example .env
+   copy .env.example .env
    ```
 
    Update the following variables in `.env`:
