@@ -1,10 +1,7 @@
 import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi'
-import express, { Express } from 'express'
+import { Express } from 'express'
 import swaggerUi from 'swagger-ui-express'
 import { registry } from './registry'
-
-import path from 'path';
-const swaggerDistPath = path.join(__dirname, '../node_modules/swagger-ui-dist');
 
 export function setupOpenApi(app: Express): void {
   const generator = new OpenApiGeneratorV3(registry.definitions)
@@ -14,9 +11,16 @@ export function setupOpenApi(app: Express): void {
     servers: [{ url: '/api' }],
   })
 
-  
-  app.use('/api-docs', express.static(swaggerDistPath, { index: false }), swaggerUi.serve, swaggerUi.setup(document));
-
-  //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(document))
+app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(document, {
+      customCssUrl: 'https://unpkg.com/swagger-ui-dist@5/swagger-ui.css',
+      customJs: [
+        'https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js',
+        'https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js',
+      ],
+    }),
+  )
   app.get('/api-docs.json', (_req, res) => res.json(document))
 }

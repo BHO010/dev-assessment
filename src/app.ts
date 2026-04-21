@@ -23,17 +23,7 @@ const corsOptions = process.env['CORS_OPTIONS'] ? JSON.parse(process.env['CORS_O
 
 app.use(
   helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrcElem: ["'self'", "'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        styleSrcElem: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", 'data:'],
-        connectSrc: ["'self'", "'unsafe-inline'"],
-      },
-    },
+    contentSecurityPolicy: false,
   }),
 )
 app.use(cors(corsOptions))
