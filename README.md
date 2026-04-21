@@ -15,7 +15,6 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
 
 ### Prerequisites
 
-- Node.js v18+
 - A running MySQL instance (local or remote)
 
 ### Steps
