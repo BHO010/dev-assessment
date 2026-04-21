@@ -72,6 +72,12 @@ A REST API built with **Node.js**, **Express**, and **TypeScript**. It uses:
    The API will be available at `http://localhost:3000`.  
    Swagger UI is available at `http://localhost:3000/api-docs`.
 
+6. **Unit testing**
+
+   ```bash
+   npm run test
+   ```
+
 ## Try it Live
 
 Base URL: `https://dev-assessment-chi.vercel.app`
