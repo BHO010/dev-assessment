@@ -11,6 +11,10 @@ export const SuspendBodySchema = z
       })
       .email({ error: 'Invalid student email' }),
   })
-  .openapi('SuspendBody')
+  .openapi('SuspendBody', {
+    example: {
+      student: "studentC@school.com"
+    }
+  })
 
 export type SuspendBody = z.infer<typeof SuspendBodySchema>

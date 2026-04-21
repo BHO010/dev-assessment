@@ -19,6 +19,14 @@ export const RegisterBodySchema = z
       })
       .min(1, { error: 'At least one student is required' }),
   })
-  .openapi('RegisterBody')
+  .openapi('RegisterBody', {
+    example: {
+      teacher: "teacherA@school.com",
+      students: [
+        "studentA@school.com",
+        "studentB@school.com"
+      ]
+    }
+  })
 
 export type RegisterBody = z.infer<typeof RegisterBodySchema>

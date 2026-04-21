@@ -19,6 +19,11 @@ export const RetrieveForNotificationsBodySchema = z
       })
       .min(1, { error: 'Notification text is required' }),
   })
-  .openapi('RetrieveForNotificationsBody')
+  .openapi('RetrieveForNotificationsBody', {
+    example: {
+      teacher: 'teacherA@school.com',
+      notification: 'Hello students! @studentD@school.com',
+    },
+  })
 
 export type RetrieveForNotificationsBody = z.infer<typeof RetrieveForNotificationsBodySchema>
