@@ -13,7 +13,7 @@ app.set('trust proxy', 1)
 const limiter = rateLimit({
   windowMs: Number(process.env['RATE_LIMIT_WINDOW_MS'] ?? 15 * 60 * 1000),
   limit: Number(process.env['RATE_LIMIT_MAX'] ?? 100),
-  standardHeaders: 'draft-7',
+  standardHeaders: 'draft-8',
   legacyHeaders: false,
   message: { message: 'Too many requests, please try again later.' },
 })
