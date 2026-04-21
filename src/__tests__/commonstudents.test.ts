@@ -12,41 +12,34 @@ describe('GET /api/commonstudents', () => {
   describe('success', () => {
     it('returns all students for a single teacher', async () => {
       mockGetCommonStudents.mockResolvedValue([
-        'commonstudent1@gmail.com',
-        'commonstudent2@gmail.com',
-        'student_only_under_teacherken@gmail.com',
+        'studentA@school.com',
+        'studentB@school.com',
+        'studentC@school.com',
       ])
 
-      const res = await request(app).get('/api/commonstudents?teacher=teacherken%40gmail.com')
+      const res = await request(app).get('/api/commonstudents?teacher=teacherA%40school.com')
 
       expect(res.status).toBe(200)
       expect(res.body).toEqual({
-        students: [
-          'commonstudent1@gmail.com',
-          'commonstudent2@gmail.com',
-          'student_only_under_teacherken@gmail.com',
-        ],
+        students: ['studentA@school.com', 'studentB@school.com', 'studentC@school.com'],
       })
-      expect(mockGetCommonStudents).toHaveBeenCalledWith(['teacherken@gmail.com'])
+      expect(mockGetCommonStudents).toHaveBeenCalledWith(['teacherA@school.com'])
     })
 
     it('returns only students common to all given teachers', async () => {
-      mockGetCommonStudents.mockResolvedValue([
-        'commonstudent1@gmail.com',
-        'commonstudent2@gmail.com',
-      ])
+      mockGetCommonStudents.mockResolvedValue(['studentA@school.com', 'studentB@school.com'])
 
       const res = await request(app).get(
-        '/api/commonstudents?teacher=teacherken%40gmail.com&teacher=teacherjoe%40gmail.com',
+        '/api/commonstudents?teacher=teacherA%40school.com&teacher=teacherB%40school.com',
       )
 
       expect(res.status).toBe(200)
       expect(res.body).toEqual({
-        students: ['commonstudent1@gmail.com', 'commonstudent2@gmail.com'],
+        students: ['studentA@school.com', 'studentB@school.com'],
       })
       expect(mockGetCommonStudents).toHaveBeenCalledWith([
-        'teacherken@gmail.com',
-        'teacherjoe@gmail.com',
+        'teacherA@school.com',
+        'teacherB@school.com',
       ])
     })
 
@@ -54,7 +47,7 @@ describe('GET /api/commonstudents', () => {
       mockGetCommonStudents.mockResolvedValue([])
 
       const res = await request(app).get(
-        '/api/commonstudents?teacher=teacherken%40gmail.com&teacher=teacherjoe%40gmail.com',
+        '/api/commonstudents?teacher=teacherA%40school.com&teacher=teacherB%40school.com',
       )
 
       expect(res.status).toBe(200)
@@ -81,7 +74,7 @@ describe('GET /api/commonstudents', () => {
 
     it('returns 400 when any teacher email in the list is invalid', async () => {
       const res = await request(app).get(
-        '/api/commonstudents?teacher=teacherken%40gmail.com&teacher=not-an-email',
+        '/api/commonstudents?teacher=teacherA%40school.com&teacher=not-an-email',
       )
 
       expect(res.status).toBe(400)
@@ -94,7 +87,7 @@ describe('GET /api/commonstudents', () => {
     it('returns 500 when the service throws an unexpected error', async () => {
       mockGetCommonStudents.mockRejectedValue(new Error('DB connection failed'))
 
-      const res = await request(app).get('/api/commonstudents?teacher=teacherken%40gmail.com')
+      const res = await request(app).get('/api/commonstudents?teacher=teacherA%40school.com')
 
       expect(res.status).toBe(500)
       expect(res.body).toHaveProperty('message')

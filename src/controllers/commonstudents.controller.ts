@@ -8,7 +8,7 @@ export async function commonStudents(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const { teacher } = req.query as unknown as CommonStudentsQuery
+    const { teacher } = res.locals['query'] as CommonStudentsQuery
     const students = await getCommonStudents(teacher)
     res.json({ students })
   } catch (err) {

@@ -14,10 +14,10 @@ describe('POST /api/suspend', () => {
     it('returns 204 when student is suspended', async () => {
       mockSuspendStudent.mockResolvedValue()
 
-      const res = await request(app).post('/api/suspend').send({ student: 'studentmary@gmail.com' })
+      const res = await request(app).post('/api/suspend').send({ student: 'studentA@school.com' })
 
       expect(res.status).toBe(204)
-      expect(mockSuspendStudent).toHaveBeenCalledWith('studentmary@gmail.com')
+      expect(mockSuspendStudent).toHaveBeenCalledWith('studentA@school.com')
     })
   })
 
@@ -42,13 +42,13 @@ describe('POST /api/suspend', () => {
   describe('not found', () => {
     it('returns 404 when student does not exist', async () => {
       mockSuspendStudent.mockRejectedValue(
-        new NotFoundError('Student studentmary@gmail.com not found'),
+        new NotFoundError('Student studentA@school.com not found'),
       )
 
-      const res = await request(app).post('/api/suspend').send({ student: 'studentmary@gmail.com' })
+      const res = await request(app).post('/api/suspend').send({ student: 'studentA@school.com' })
 
       expect(res.status).toBe(404)
-      expect(res.body).toEqual({ message: 'Student studentmary@gmail.com not found' })
+      expect(res.body).toEqual({ message: 'Student studentA@school.com not found' })
     })
   })
 
@@ -56,7 +56,7 @@ describe('POST /api/suspend', () => {
     it('returns 500 when the service throws an unexpected error', async () => {
       mockSuspendStudent.mockRejectedValue(new Error('DB connection failed'))
 
-      const res = await request(app).post('/api/suspend').send({ student: 'studentmary@gmail.com' })
+      const res = await request(app).post('/api/suspend').send({ student: 'studentA@school.com' })
 
       expect(res.status).toBe(500)
       expect(res.body).toHaveProperty('message')

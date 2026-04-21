@@ -16,13 +16,13 @@ describe('POST /api/register', () => {
       const res = await request(app)
         .post('/api/register')
         .send({
-          teacher: 'teacherken@gmail.com',
-          students: ['studentjon@gmail.com'],
+          teacher: 'teacherA@school.com',
+          students: ['studentA@school.com'],
         })
 
       expect(res.status).toBe(204)
-      expect(mockRegisterStudents).toHaveBeenCalledWith('teacherken@gmail.com', [
-        'studentjon@gmail.com',
+      expect(mockRegisterStudents).toHaveBeenCalledWith('teacherA@school.com', [
+        'studentA@school.com',
       ])
     })
 
@@ -32,14 +32,14 @@ describe('POST /api/register', () => {
       const res = await request(app)
         .post('/api/register')
         .send({
-          teacher: 'teacherken@gmail.com',
-          students: ['studentjon@gmail.com', 'studenthon@gmail.com'],
+          teacher: 'teacherA@school.com',
+          students: ['studentA@school.com', 'studentB@school.com'],
         })
 
       expect(res.status).toBe(204)
-      expect(mockRegisterStudents).toHaveBeenCalledWith('teacherken@gmail.com', [
-        'studentjon@gmail.com',
-        'studenthon@gmail.com',
+      expect(mockRegisterStudents).toHaveBeenCalledWith('teacherA@school.com', [
+        'studentA@school.com',
+        'studentB@school.com',
       ])
     })
   })
@@ -48,7 +48,7 @@ describe('POST /api/register', () => {
     it('returns 400 when teacher field is missing', async () => {
       const res = await request(app)
         .post('/api/register')
-        .send({ students: ['studentjon@gmail.com'] })
+        .send({ students: ['studentA@school.com'] })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -58,7 +58,7 @@ describe('POST /api/register', () => {
     it('returns 400 when teacher is not a valid email', async () => {
       const res = await request(app)
         .post('/api/register')
-        .send({ teacher: 'not-an-email', students: ['studentjon@gmail.com'] })
+        .send({ teacher: 'not-an-email', students: ['studentA@school.com'] })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -66,7 +66,7 @@ describe('POST /api/register', () => {
     })
 
     it('returns 400 when students field is missing', async () => {
-      const res = await request(app).post('/api/register').send({ teacher: 'teacherken@gmail.com' })
+      const res = await request(app).post('/api/register').send({ teacher: 'teacherA@school.com' })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -76,7 +76,7 @@ describe('POST /api/register', () => {
     it('returns 400 when students array is empty', async () => {
       const res = await request(app)
         .post('/api/register')
-        .send({ teacher: 'teacherken@gmail.com', students: [] })
+        .send({ teacher: 'teacherA@school.com', students: [] })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -86,7 +86,7 @@ describe('POST /api/register', () => {
     it('returns 400 when a student email is invalid', async () => {
       const res = await request(app)
         .post('/api/register')
-        .send({ teacher: 'teacherken@gmail.com', students: ['valid@gmail.com', 'not-an-email'] })
+        .send({ teacher: 'teacherA@school.com', students: ['studentA@school.com', 'not-an-email'] })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -101,8 +101,8 @@ describe('POST /api/register', () => {
       const res = await request(app)
         .post('/api/register')
         .send({
-          teacher: 'teacherken@gmail.com',
-          students: ['studentjon@gmail.com'],
+          teacher: 'teacherA@school.com',
+          students: ['studentA@school.com'],
         })
 
       expect(res.status).toBe(500)

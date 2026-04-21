@@ -12,35 +12,35 @@ describe('POST /api/retrievefornotifications', () => {
   describe('success', () => {
     it('returns registered students and @mentioned students combined', async () => {
       mockGetRecipients.mockResolvedValue([
-        'studentbob@gmail.com',
-        'studentagnes@gmail.com',
-        'studentmiche@gmail.com',
+        'studentA@school.com',
+        'studentB@school.com',
+        'studentC@school.com',
       ])
 
       const res = await request(app).post('/api/retrievefornotifications').send({
-        teacher: 'teacherken@gmail.com',
-        notification: 'Hello students! @studentagnes@gmail.com @studentmiche@gmail.com',
+        teacher: 'teacherA@school.com',
+        notification: 'Hello students! @studentB@school.com @studentC@school.com',
       })
 
       expect(res.status).toBe(200)
       expect(res.body).toEqual({
-        recipients: ['studentbob@gmail.com', 'studentagnes@gmail.com', 'studentmiche@gmail.com'],
+        recipients: ['studentA@school.com', 'studentB@school.com', 'studentC@school.com'],
       })
       expect(mockGetRecipients).toHaveBeenCalledWith(
-        'teacherken@gmail.com',
-        'Hello students! @studentagnes@gmail.com @studentmiche@gmail.com',
+        'teacherA@school.com',
+        'Hello students! @studentB@school.com @studentC@school.com',
       )
     })
 
     it('returns only registered students when there are no @mentions', async () => {
-      mockGetRecipients.mockResolvedValue(['studentbob@gmail.com'])
+      mockGetRecipients.mockResolvedValue(['studentA@school.com'])
 
       const res = await request(app)
         .post('/api/retrievefornotifications')
-        .send({ teacher: 'teacherken@gmail.com', notification: 'Hey everybody' })
+        .send({ teacher: 'teacherA@school.com', notification: 'Hey everybody' })
 
       expect(res.status).toBe(200)
-      expect(res.body).toEqual({ recipients: ['studentbob@gmail.com'] })
+      expect(res.body).toEqual({ recipients: ['studentA@school.com'] })
     })
 
     it('returns empty array when teacher has no students and no @mentions', async () => {
@@ -48,32 +48,30 @@ describe('POST /api/retrievefornotifications', () => {
 
       const res = await request(app)
         .post('/api/retrievefornotifications')
-        .send({ teacher: 'teacherken@gmail.com', notification: 'Hey everybody' })
+        .send({ teacher: 'teacherA@school.com', notification: 'Hey everybody' })
 
       expect(res.status).toBe(200)
       expect(res.body).toEqual({ recipients: [] })
     })
 
     it('excludes suspended students (handled by service)', async () => {
-      // studentbob is suspended, so service only returns studentagnes
-      mockGetRecipients.mockResolvedValue(['studentagnes@gmail.com'])
+      mockGetRecipients.mockResolvedValue(['studentB@school.com'])
 
       const res = await request(app).post('/api/retrievefornotifications').send({
-        teacher: 'teacherken@gmail.com',
-        notification: 'Hi @studentagnes@gmail.com',
+        teacher: 'teacherA@school.com',
+        notification: 'Hi @studentB@school.com',
       })
 
       expect(res.status).toBe(200)
-      expect(res.body).toEqual({ recipients: ['studentagnes@gmail.com'] })
+      expect(res.body).toEqual({ recipients: ['studentB@school.com'] })
     })
 
     it('returns no duplicate recipients', async () => {
-      // studentagnes is both registered and @mentioned — service deduplicates
-      mockGetRecipients.mockResolvedValue(['studentagnes@gmail.com'])
+      mockGetRecipients.mockResolvedValue(['studentA@school.com'])
 
       const res = await request(app).post('/api/retrievefornotifications').send({
-        teacher: 'teacherken@gmail.com',
-        notification: 'Hi @studentagnes@gmail.com',
+        teacher: 'teacherA@school.com',
+        notification: 'Hi @studentA@school.com',
       })
 
       expect(res.status).toBe(200)
@@ -105,7 +103,7 @@ describe('POST /api/retrievefornotifications', () => {
     it('returns 400 when notification field is missing', async () => {
       const res = await request(app)
         .post('/api/retrievefornotifications')
-        .send({ teacher: 'teacherken@gmail.com' })
+        .send({ teacher: 'teacherA@school.com' })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -115,7 +113,7 @@ describe('POST /api/retrievefornotifications', () => {
     it('returns 400 when notification is an empty string', async () => {
       const res = await request(app)
         .post('/api/retrievefornotifications')
-        .send({ teacher: 'teacherken@gmail.com', notification: '' })
+        .send({ teacher: 'teacherA@school.com', notification: '' })
 
       expect(res.status).toBe(400)
       expect(res.body).toHaveProperty('message')
@@ -129,7 +127,7 @@ describe('POST /api/retrievefornotifications', () => {
 
       const res = await request(app)
         .post('/api/retrievefornotifications')
-        .send({ teacher: 'teacherken@gmail.com', notification: 'Hello!' })
+        .send({ teacher: 'teacherA@school.com', notification: 'Hello!' })
 
       expect(res.status).toBe(500)
       expect(res.body).toHaveProperty('message')
